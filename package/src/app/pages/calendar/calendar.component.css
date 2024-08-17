@@ -1,0 +1,33 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.calendar-wrapper {
+  padding: 20px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-title {
+  flex: 1;
+}
+
+.spacer {
+  flex: 2;
+}
+
+.date-input {
+  display: ruby;
+  flex-direction: row;
+  width: auto;
+}
+
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+

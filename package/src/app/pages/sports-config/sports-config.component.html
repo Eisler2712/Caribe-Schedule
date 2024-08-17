@@ -1,0 +1,24 @@
+<div class="sports-management-container">
+  <div class="content-wrapper">
+    <h2 class="title">Gestión de Deportes</h2>
+
+    <div class="sports-list">
+      <mat-list class="overflow-auto max-h-72" *ngIf="sportsList.length > 0">
+        <mat-list-item class="items-center" *ngFor="let sport of sportsList">
+          <h3 mat-line>{{ sport.name }}</h3>
+          <button mat-icon-button color="primary" (click)="editSport(sport)" class="cursor-pointer">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteSport(sport)" class="cursor-pointer">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+      <div class="no-sports" *ngIf="sportsList.length === 0">
+        <h3>No hay deportes registrados</h3>
+      </div>
+    </div>
+  </div>
+
+  <button mat-flat-button color="primary" class="add-sport-button" (click)="createSport()">Agregar Deporte</button>
+</div>

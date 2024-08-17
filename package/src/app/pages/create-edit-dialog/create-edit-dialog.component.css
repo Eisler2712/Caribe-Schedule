@@ -1,0 +1,12 @@
+body {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.wrapper {
+    margin-bottom: 20px;
+}
+
+.gender-radio-group .mat-radio-button .mat-radio-inner-circle {
+  background-color: blue !important;
+}
+

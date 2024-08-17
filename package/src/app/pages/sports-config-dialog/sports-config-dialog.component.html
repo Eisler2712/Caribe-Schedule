@@ -1,0 +1,55 @@
+<mat-toolbar color="primary" class="justify-center items-baseline"
+             style="display: flex !important; align-items: baseline !important;" mat-dialog-title fxLayout
+             fxLayoutAlign="center center">
+  <span
+    style="color: white; text-align: center !important;">{{ isEdit ? 'Editar' + ' ' + data.sport.name : 'Crear Deporte' }}</span>
+</mat-toolbar>
+
+<mat-dialog-content style="min-width: 500px">
+  <div class="dialog-content">
+    <div [formGroup]="form" class="dropdown-container">
+      <mat-form-field class="dropdown-field flex items-center">
+        <mat-label>Deporte</mat-label>
+        <input matInput formControlName="name" required placeholder="Nombre del Deporte">
+        <mat-error>{{ required }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="dropdown-field flex items-center">
+        <mat-label>Zona</mat-label>
+        <input matInput formControlName="zone" required placeholder="Nombre de la zona">
+        <mat-error>{{ required }}</mat-error>
+      </mat-form-field>
+      <div style="display: flex">
+        <mat-form-field class="dropdown-field">
+          <mat-label>Deportes incompatibles</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let availableSport of allSports" [value]="availableSport.name" (click)="updateSelectedSport(availableSport.name)">
+              {{ availableSport.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-icon-button color="primary" (click)="addIncompatibleSport()"
+                [disabled]="!selectedIncompatibleSport">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="incompatibleSports.length > 0" class="incompatible-list">
+      <h3>Deportes Incompatibles</h3>
+      <ul>
+        <li *ngFor="let incompatible of incompatibleSports" class="incompatible-item">
+          <span>{{ incompatible }}</span>
+          <button mat-icon-button color="warn" (click)="removeIncompatibleSport(incompatible)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="onCancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="!form.valid">Guardar</button>
+</mat-dialog-actions>

@@ -1,0 +1,76 @@
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.dropdown-field {
+  flex-grow: 1;
+}
+
+.mat-dialog-title {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.incompatible-list {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.incompatible-list h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #333;
+}
+
+.incompatible-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.incompatible-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.incompatible-item:last-child {
+  border-bottom: none;
+}
+
+.mat-dialog-actions {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.mat-dialog-actions button {
+  min-width: 100px;
+}
+
+.mat-dialog-actions button:first-child {
+  margin-right: 10px;
+}
+
+.mat-dialog-content {
+  padding-bottom: 20px;
+}
+
+
+

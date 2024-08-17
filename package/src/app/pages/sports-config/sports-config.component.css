@@ -1,0 +1,89 @@
+.sports-management-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.content-wrapper {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.sports-list {
+  margin-bottom: 20px;
+}
+
+mat-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.add-sport-button {
+  display: block;
+  margin: 20px auto;
+  width: 100%;
+}
+
+.edit-sport-dialog {
+  padding: 20px;
+}
+
+.incompatible-list {
+  margin-top: 20px;
+}
+
+.incompatible-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.incompatible-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+mat-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+mat-list-item h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+mat-list-item button {
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+::ng-deep .mdc-list-item__primary-text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}

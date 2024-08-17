@@ -1,0 +1,61 @@
+<mat-toolbar color="primary" class="justify-center items-baseline"
+             style="display: flex !important; align-items: baseline !important;" mat-dialog-title fxLayout="row"
+             fxLayoutAlign="center center">
+  <span style="color: white; text-align: center !important;">{{ title }}</span>
+</mat-toolbar>
+
+<mat-dialog-content class="p-2 pt-0 m-0 min-h-60 flex justify-center">
+
+  <div [formGroup]="form" class="flex flex-1 flex-col gap-2">
+    <div class="flex flex-col px-6 pt-4">
+
+      <mat-form-field class="dropdown-field">
+        <mat-label>Deporte</mat-label>
+        <mat-select formControlName="sport">
+          <mat-option *ngFor="let availableSport of allSports" [value]="availableSport.name">
+            {{ availableSport.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="fuse-mat-bold w-full fuse-mat-dense">
+        <mat-label>Fecha</mat-label>
+        <input matInput [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" formControlName="date" readonly>
+        <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
+        <mat-error>{{ required }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="fuse-mat-bold w-full fuse-mat-dense">
+        <mat-label>Hora de Inicio</mat-label>
+        <input matInput formControlName="initHour" [ngxTimepicker]="startTimepicker" readonly>
+        <ngx-material-timepicker #startTimepicker></ngx-material-timepicker>
+        <mat-error>{{ required }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="fuse-mat-bold w-full fuse-mat-dense">
+        <mat-label>Hora de Fin</mat-label>
+        <input matInput formControlName="endHour" [ngxTimepicker]="endTimepicker" readonly>
+        <ngx-material-timepicker #endTimepicker></ngx-material-timepicker>
+        <mat-error>{{ required }}</mat-error>
+      </mat-form-field>
+
+      <div class="fuse-mat-bold w-full fuse-mat-dense">
+        <label>Género</label>
+        <mat-radio-group formControlName="gender" class="gender-radio-group">
+          <mat-radio-button value="M" color="primary" [checked]="checkMale">Masculino</mat-radio-button>
+          <mat-radio-button value="F" color="primary" [checked]="!checkMale">Femenino</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="items-center" style="justify-content: center !important;">
+  <button mat-raised-button [disabled]="form.invalid" [color]="'primary'" (click)="submit()">
+    <div class="flex flex-row items-center">
+      <span>{{ actionText }}</span>
+    </div>
+  </button>
+  <button mat-raised-button mat-dialog-close="close">Cancelar</button>
+</mat-dialog-actions>

@@ -1,0 +1,79 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="toolbar">
+      <span class="toolbar-title">Calendario Caribes</span>
+      <span class="spacer"></span>
+      <mat-form-field appearance="fill" class="date-input" style="display: ruby">
+        <mat-label>Selecciona una fecha</mat-label>
+        <input matInput [owlDateTimeTrigger]="dtPicker" [owlDateTime]="dtPicker" [formControl]="dateControl">
+        <owl-date-time #dtPicker [pickerType]="'calendar'"></owl-date-time>
+      </mat-form-field>
+    </mat-toolbar>
+    <div class="calendar-wrapper">
+      <full-calendar #fullcalendar [options]="calendarOptions"></full-calendar>
+    </div>
+    <div class="table-wrapper mt-4 p-24 bg-white shadow-md" style="border-radius: 10px">
+      <h2 class="text-xl font-semibold mb-4">Eventos - {{ selectedMonth | date: 'MMMM yyyy':'es' }}</h2>
+      <div style="display: flex; align-items: center; padding-bottom: 16px">
+        <mat-form-field appearance="outline" style="width: 25%; display: contents">
+          <input matInput (keyup)="applyTitleFilter($event)" placeholder="Filtrar por título">
+          <button [disabled]="true" mat-icon-button matSuffix color="primary">
+            <mat-icon color="primary">search</mat-icon>
+          </button>
+        </mat-form-field>
+        <a
+          mat-flat-button
+          color="primary"
+          target="_blank"
+          style="height: 56px; display: flex; align-items: center; margin-left: 16px; width: 60%"
+          (click)="addUser()"
+        >
+          Crear Evento
+        </a>
+      </div>
+
+      <table mat-table [dataSource]="filteredEvents" class="min-w-full divide-y divide-gray-200 overflow-auto pt-24">
+        <!-- Título Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Título </th>
+          <td mat-cell *matCellDef="let event"> {{event.title}} </td>
+        </ng-container>
+        <ng-container matColumnDef="zone">
+          <th mat-header-cell *matHeaderCellDef> Zona </th>
+          <td mat-cell *matCellDef="let event"> {{event.zone}} </td>
+        </ng-container>
+        <!-- Fecha de inicio Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
+          <td mat-cell *matCellDef="let event"> {{event.date | date}} </td>
+        </ng-container>
+        <!-- Hora de inicio Column -->
+        <ng-container matColumnDef="initHour">
+          <th mat-header-cell *matHeaderCellDef> Hora de inicio </th>
+          <td mat-cell *matCellDef="let event"> {{event.initHour}} </td>
+        </ng-container>
+        <!-- Hora de fin Column -->
+        <ng-container matColumnDef="endHour">
+          <th mat-header-cell *matHeaderCellDef> Hora de fin </th>
+          <td mat-cell *matCellDef="let event"> {{event.endHour}} </td>
+        </ng-container>
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let event">
+            <button mat-icon-button color="warn" (click)="deleteEvent(event)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="editEvent(event)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSize]="5"></mat-paginator>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

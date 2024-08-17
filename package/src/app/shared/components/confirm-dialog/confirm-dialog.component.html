@@ -1,0 +1,36 @@
+<mat-toolbar color="primary" class="justify-center items-baseline" style="display: flex !important; align-items: baseline !important;" mat-dialog-title fxLayout fxLayoutAlign="center center">
+    <span style="color: white; text-align: center !important;">{{title | uppercase}}</span>
+</mat-toolbar>
+
+<mat-dialog-content class="flex flex-col gap-1" style="padding: 20px !important;" [ngClass]="{'opacity-50 pointer-events-none': isLoading}">
+    <div *ngIf="message !== ''" [ngClass]="{'text-center': textCenterTitle}">
+        <div *ngIf="messageBlack" class="weight-bold-class text-lg text-center">{{ message }}</div>
+        <div *ngIf="!messageBlack" class="text-lg text-center">{{ message }}</div>
+    </div>
+
+    <div *ngIf="subMessage != ''" class="sub-message-class text-lg text-center">{{ subMessage }}</div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="flex flex-row items-center justify-center" style="justify-content: center !important;">
+    <button mat-raised-button (click)="onSubmit()" color="primary" [ngClass]="{'pr-2': isLoading}" *ngIf="!isWarnBotton" [disabled]="isLoading">
+        <div class="flex items-center">
+            <div>{{confirmAction}}</div>
+            <i-tabler *ngIf="isLoading"
+                      class="routeIcon"
+                      name="IconLoaderQuarter"
+                      matListItemIcon>
+            </i-tabler>
+        </div>
+    </button>
+    <button mat-raised-button (click)="onSubmit()" color="warn" *ngIf="isWarnBotton" [disabled]="isLoading" [ngClass]="{'pr-2': isLoading}">
+        <div class="flex items-center">
+            <div>{{confirmAction}}</div>
+            <i-tabler *ngIf="isLoading"
+                      class="routeIcon"
+                      name="IconLoaderQuarter"
+                      matListItemIcon>
+            </i-tabler>
+        </div>
+    </button>
+    <button [disabled]="isLoading" mat-raised-button mat-dialog-close="close">{{cancelAction}}</button>
+</mat-dialog-actions>
