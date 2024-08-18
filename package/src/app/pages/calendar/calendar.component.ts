@@ -179,9 +179,10 @@ export class CalendarComponent implements OnInit, AfterViewInit {
         notificationSuccess: 'Evento eliminado exitosamente',
       },
     }).afterClosed().subscribe(result => {
-      if (!result) {
-        this.refreshEvents();
+      if (result.detail) {
+        alert('Error al eliminar el evento: ' + result.details);
       }
+      this.refreshEvents();
     });
   }
 
@@ -194,11 +195,10 @@ export class CalendarComponent implements OnInit, AfterViewInit {
       },
     }).afterClosed().subscribe(_ => {
       this.refreshEvents();
-      alert('Evento editado correctamente');
     });
   }
 
-  addUser() {
+  createEvent() {
     this.dialog.open(CreateEditDialogComponent, {
       width: '500px',
       data: {
@@ -206,7 +206,6 @@ export class CalendarComponent implements OnInit, AfterViewInit {
       },
     }).afterClosed().subscribe(_ => {
       this.refreshEvents();
-      alert('Evento creado correctamente');
     });
   }
 

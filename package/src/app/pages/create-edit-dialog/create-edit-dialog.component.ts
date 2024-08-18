@@ -146,20 +146,22 @@ export class CreateEditDialogComponent implements OnInit, OnDestroy {
     };
     if (this.isEdit) {
       this.eventService.updateEvent(req, this.data.event.identifier).subscribe((resp: any) => {
-        if(resp){
+        if(resp.error) {
+          alert('Error al editar el evento: ' + resp.error.detail);
+          this.enableForm()
+        }
+        else {
           this.dialogRef.close(resp);
-        }else{
-          alert('Error al actualizar el evento');
-          this.enableForm();
         }
       });
     } else {
       this.eventService.createEvent(req).subscribe((resp: any) => {
-        if(resp){
+        if(resp.status !== 201 ) {
+          alert('Error al crear el evento: ' + resp.error.detail);
+          this.enableForm()
+        }
+        else {
           this.dialogRef.close(resp);
-        }else{
-          alert('Error al crear el evento');
-          this.enableForm();
         }
       });
     }

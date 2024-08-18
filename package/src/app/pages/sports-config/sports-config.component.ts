@@ -52,18 +52,18 @@ export class SportsConfigComponent implements OnInit{
     this.dialog.open(SportsConfigDialogComponent, {
       data: { sport: sport, isEdit: true},
     }).afterClosed().subscribe(result => {
-      if (result) {
+      if (result){
         this.refreshSportsList();
         alert('Deporte editado exitosamente');
-      }else {
-        alert('Error al editar el deporte');
       }
       this.selectedSport = null;
     });
   }
   private getAllSports() {
     this.sportService.getSports().subscribe((resp: any) => {
-      this.sportsList = resp.sort((a: Sport, b: Sport) => a.name.localeCompare(b.name));
+      if(resp){
+        this.sportsList = resp.sort((a: Sport, b: Sport) => a.name.localeCompare(b.name));
+      }
     });
   }
 
@@ -78,8 +78,6 @@ export class SportsConfigComponent implements OnInit{
       if (result) {
         this.refreshSportsList();
         alert('Deporte creado exitosamente');
-      }else{
-        alert('Error al crear el deporte');
       }
     });
   }
@@ -96,7 +94,7 @@ export class SportsConfigComponent implements OnInit{
         notificationSuccess: 'Deporte eliminado exitosamente',
       },
     }).afterClosed().subscribe(result => {
-      if (!result) {
+      if (result){
         this.refreshSportsList();
       }
     });

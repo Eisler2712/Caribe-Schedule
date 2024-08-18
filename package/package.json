@@ -33,6 +33,7 @@
     "date-fns": "^3.6.0",
     "devextreme": "^24.1.4",
     "devextreme-angular": "^24.1.4",
+    "luxon": "^3.5.0",
     "ng-apexcharts": "1.10.0",
     "ngx-material-timepicker": "^13.1.1",
     "ngx-scrollbar": "^14.1.0",
