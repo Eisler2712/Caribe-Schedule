@@ -16,6 +16,10 @@ Asegúrate de tener instalado Node.js y Angular CLI:
 - [Node.js](https://nodejs.org/) (versión 20.x o superior)
 - [Angular CLI](https://angular.io/cli) (versión 17.x o superior)
 
+Asegúrate de tener descargado y ejecutado el proyecto:
+
+- https://github.com/theGitNoob/sports-calendar
+
 ### Clonar el Repositorio
 
 ```bash
