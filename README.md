@@ -1,7 +1,7 @@
 # Caribe-Schedule
 
-[![Angular](https://img.shields.io/badge/angular-v17.0.0-red)](https://angular.io/)
-[![Node.js](https://img.shields.io/badge/node.js-v20.0.0-green)](https://nodejs.org/)
+[![Angular](https://img.shields.io/badge/angular-v17.3.7-red)](https://angular.io/)
+[![Node.js](https://img.shields.io/badge/node.js-v20.16.0-green)](https://nodejs.org/)
 
 ## Descripción
 
