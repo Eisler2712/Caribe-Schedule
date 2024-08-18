@@ -1,29 +1,29 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import {CommonModule} from '@angular/common';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { TablerIconsModule } from 'angular-tabler-icons';
-import { MatSidenav, MatSidenavContainer, MatSidenavContent } from "@angular/material/sidenav";
-import { MatToolbar } from "@angular/material/toolbar";
-import { MatListItem, MatNavList } from "@angular/material/list";
-import { FullCalendarComponent, FullCalendarModule } from "@fullcalendar/angular";
-import { EventDialogComponent } from "../event-dialog/event-dialog.component";
-import { MatDialog } from "@angular/material/dialog";
-import { FormControl, ReactiveFormsModule } from "@angular/forms";
-import { MatFormField, MatLabel, MatSuffix } from "@angular/material/form-field";
-import { MatInput } from "@angular/material/input";
-import { endOfMonth, isWithinInterval, parseISO, startOfMonth } from 'date-fns';
+import {TablerIconsModule} from 'angular-tabler-icons';
+import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
+import {MatToolbar} from "@angular/material/toolbar";
+import {MatListItem, MatNavList} from "@angular/material/list";
+import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
+import {EventDialogComponent} from "../event-dialog/event-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {endOfMonth, isWithinInterval, parseISO, startOfMonth} from 'date-fns';
 import esLocale from '@fullcalendar/core/locales/es';
-import { CreateEditDialogComponent } from "../create-edit-dialog/create-edit-dialog.component";
-import { OwlDateTimeModule } from "@danielmoncada/angular-datetime-picker";
-import { MatPaginator } from "@angular/material/paginator";
-import { EventService } from "../../services/event.service";
-import { EventModel } from "../../shared/models/event-model";
+import {CreateEditDialogComponent} from "../create-edit-dialog/create-edit-dialog.component";
+import {OwlDateTimeModule} from "@danielmoncada/angular-datetime-picker";
+import {MatPaginator} from "@angular/material/paginator";
+import {EventService} from "../../services/event.service";
+import {EventModel} from "../../shared/models/event-model";
 import {ReformatUtils} from "../../shared/Utils/reformat.utils";
 import {ConfirmDialogComponent} from "../../shared/components/confirm-dialog/confirm-dialog.component";
 
@@ -62,7 +62,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   @ViewChild('fullcalendar') calendarComponent: FullCalendarComponent | undefined;
   calendarOptions: any;
   dateControl: FormControl = new FormControl(new Date());
-  displayedColumns: string[] = ['title', 'zone', 'date', 'initHour', 'endHour', 'actions'];
+  displayedColumns: string[] = ['title', 'zone', 'gender','date', 'initHour', 'endHour', 'actions'];
   filteredEvents = new MatTableDataSource<any>();
   selectedMonth: Date = new Date();
 
@@ -84,7 +84,8 @@ export class CalendarComponent implements OnInit, AfterViewInit {
           date: initDate.date,
           initHour: initDate.time,
           endHour: endDate.time,
-          identifier: event.id
+          identifier: event.id,
+          gender: event.gender == 'F' ? 'Femenino' : 'Masculino',
         });
       }
       this.updateCalendarEvents();
@@ -121,7 +122,12 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.filteredEvents.filterPredicate = (data: any, filter: string): boolean => {
+      const title = String(data.title || '').toLowerCase();
+      return title.includes(filter.toLowerCase());
+    };
+  }
 
   ngAfterViewInit(): void {
     this.filteredEvents.paginator = this.paginator;
@@ -159,8 +165,8 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   }
 
   applyTitleFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.filteredEvents.filter = filterValue.trim().toLowerCase();
+    this.filteredEvents.filter = (event.target as HTMLInputElement).value
+    this.cdr.detectChanges();
 
     if (this.filteredEvents.paginator) {
       this.filteredEvents.paginator.firstPage();
@@ -179,8 +185,8 @@ export class CalendarComponent implements OnInit, AfterViewInit {
         notificationSuccess: 'Evento eliminado exitosamente',
       },
     }).afterClosed().subscribe(result => {
-      if (result.detail) {
-        alert('Error al eliminar el evento: ' + result.details);
+      if (result?.error) {
+        alert('Error al eliminar el evento: ' + result.error.detail);
       }
       this.refreshEvents();
     });
@@ -222,7 +228,8 @@ export class CalendarComponent implements OnInit, AfterViewInit {
           date: initDate.date,
           initHour: initDate.time,
           endHour: endDate.time,
-          identifier: event.id
+          identifier: event.id,
+          gender: event.gender == 'F' ? 'Femenino' : 'Masculino',
         });
       }
       this.updateCalendarEvents();

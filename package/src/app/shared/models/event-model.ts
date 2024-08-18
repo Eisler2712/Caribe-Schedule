@@ -5,5 +5,6 @@ export interface EventModel{
   date: string,
   initHour: string,
   endHour: string,
-  identifier: number
+  identifier: number,
+  gender: string
 }

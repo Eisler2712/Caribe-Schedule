@@ -156,7 +156,7 @@ export class CreateEditDialogComponent implements OnInit, OnDestroy {
       });
     } else {
       this.eventService.createEvent(req).subscribe((resp: any) => {
-        if(resp.status !== 201 ) {
+        if(resp.error) {
           alert('Error al crear el evento: ' + resp.error.detail);
           this.enableForm()
         }
