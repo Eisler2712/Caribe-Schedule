@@ -5,7 +5,7 @@
 
 ## Descripción
 
-**Caribe-Schedule** es una aplicación web desarrollada en Angular 17 con un backend en Node.js 20. Esta aplicación está diseñada para gestionar y visualizar los eventos de los Juegos Caribes. Proporciona un calendario interactivo que muestra todos los eventos, una tabla que permite la modificación de dichos eventos, y una sección de gestión de deportes que incluye funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) para la administración de los deportes.
+**Caribe-Schedule** es una aplicación web desarrollada en Angular 17 y Node.js 20. Esta aplicación está diseñada para gestionar y visualizar los eventos de los Juegos Caribes. Proporciona un calendario interactivo que muestra todos los eventos, una tabla que permite la modificación de dichos eventos, y una sección de gestión de deportes que incluye funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) para la administración de los deportes.
 
 ## Instalación
 
